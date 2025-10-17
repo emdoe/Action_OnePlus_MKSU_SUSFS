@@ -66,11 +66,12 @@ on:
           - android13
           - android14
           - android15
+          - android16
       KERNEL_VERSION:
        type: choice
        description: "内核版本"
        required: true
-       default: "5.15"
+       default: "6.6"
        options:
          - "5.10"
          - "5.15"
@@ -307,7 +308,7 @@ jobs:
               sed -i 's/CONFIG_ZRAM=m/CONFIG_ZRAM=y/g' "$CONFIG_FILE"
             fi
 
-            if [ "${{ github.event.inputs.ANDROID_VERSION }}" = "android14" ] || [ "${{ github.event.inputs.ANDROID_VERSION }}" = "android15" ]; then
+            if [ "${{ github.event.inputs.ANDROID_VERSION }}" = "android14" ] || [ "${{ github.event.inputs.ANDROID_VERSION }}" = "android15" ] || [ "${{ github.event.inputs.ANDROID_VERSION }}" = "android16" ]; then
               if [  -e ./common/modules.bzl ]; then
                 sed -i 's/"drivers\/block\/zram\/zram\.ko",//g; s/"mm\/zsmalloc\.ko",//g' "./common/modules.bzl"
               fi
